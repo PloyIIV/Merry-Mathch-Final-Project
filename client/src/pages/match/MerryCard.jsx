@@ -31,7 +31,7 @@ function MerryCard(props) {
     const { data } = await supabase
       .from("profiles")
       .select(
-        "*, users(email, username, user_id),hobbies(hob_1,hob_2,hob_3,hob_4,hob_5,hob_6,hob_7,hob_8,hob_9,hob_10), profile_image(img_1, img_2, img_3,img_4,img_5)"
+        "*, users(email, username, user_id),hobbies(hob_1,hob_2,hob_3,hob_4,hob_5,hob_6,hob_7,hob_8,hob_9,hob_10), profile_image(img_1, img_2, img_3,img_4,img_5)",
       )
       .eq("user_id", item.chooser)
       .neq("user_id", userId);
@@ -192,11 +192,13 @@ function MerryCard(props) {
     <div>
       <>
         {clicked && (
-          <PreviewCard
-            setClicked={setClicked}
-            clicked={clicked}
-            userId={proUserId}
-          />
+          <div className="z-10 fixed -translate-x-1/2 left-1/2 top-1/2 -translate-y-1/2">
+            <PreviewCard
+              setClicked={setClicked}
+              clicked={clicked}
+              userId={proUserId}
+            />
+          </div>
         )}
         <div className="flex border-b h-[180px] items-center py-28 my-3">
           <div>

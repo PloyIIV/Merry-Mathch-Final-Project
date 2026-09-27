@@ -164,7 +164,7 @@ function ProfileEditPage() {
           headers: {
             "Content-Type": "multipart/form-data", // Set the Content-Type header
           },
-        }
+        },
       );
 
       console.log(result);
@@ -202,15 +202,13 @@ function ProfileEditPage() {
     }
 
     const notImage = incoming.filter(
-      (file) => !acceptedTypes.includes(file.type)
+      (file) => !acceptedTypes.includes(file.type),
     );
     const tooLarge = incoming.filter(
-      (file) =>
-        acceptedTypes.includes(file.type) && file.size > maxFileSize
+      (file) => acceptedTypes.includes(file.type) && file.size > maxFileSize,
     );
     const valid = incoming.filter(
-      (file) =>
-        acceptedTypes.includes(file.type) && file.size <= maxFileSize
+      (file) => acceptedTypes.includes(file.type) && file.size <= maxFileSize,
     );
 
     if (notImage.length > 0) {
@@ -279,7 +277,9 @@ function ProfileEditPage() {
     if (!silent) {
       setIsLoading(true);
     }
-    const result = await axios.get(`${import.meta.env.VITE_API_URL}/post/profile`);
+    const result = await axios.get(
+      `${import.meta.env.VITE_API_URL}/post/profile`,
+    );
     if (!silent) {
       setIsLoading(false);
     }
@@ -292,7 +292,7 @@ function ProfileEditPage() {
           id: `existing-${index}-${url}`,
           url,
           file: null,
-        }))
+        })),
     );
     setTags(result.data.data.hobbies);
     setProfile(result.data.data);
@@ -302,7 +302,6 @@ function ProfileEditPage() {
   useEffect(() => {
     getMyProfile();
   }, []);
-
 
   const handleDragStartImage = (index) => (e) => {
     e.stopPropagation();
@@ -350,11 +349,13 @@ function ProfileEditPage() {
       {!isLoading && (
         <>
           {clicked && (
-            <PreviewCard
-              setClicked={setClicked}
-              clicked={clicked}
-              userId={profile.user_id}
-            />
+            <div className="z-10 fixed -translate-x-1/2 left-1/2 top-1/2 -translate-y-1/2">
+              <PreviewCard
+                setClicked={setClicked}
+                clicked={clicked}
+                userId={profile.user_id}
+              />
+            </div>
           )}
           <section className=" w-[930px]">
             <article className="flex items-end justify-between mt-14">
@@ -619,7 +620,6 @@ function ProfileEditPage() {
                         />
                       </div>
                     </div>
-                    
                   </div>
                 </div>
                 <div className="mt-8">
@@ -737,12 +737,11 @@ function ProfileEditPage() {
                           />
                         </label>
                       );
-                    }
+                    },
                   )}
                 </div>
               </div>
             </section>
-
           </section>
         </>
       )}
